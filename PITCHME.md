@@ -8,10 +8,13 @@ Ajit Chahhal (ajit.chahhal@sap.com)
 ### Disclaimer
 ---
 ### Copenhagen
-![Image](./assets/copenhagen.jpg)
+![Image](assets/copenhagen.jpg)
+
+Note:
+How was Copenhagen?
 ---
 ### Opensource / Community / Code
-- ![Image](./assets/people.jpg)
+![Image](assets/people1.jpg)
 <!-- It was about the community..... met developers from kubeless with whom I work over github...few people SIG api machinery... -->
 ---
 ### AGENDA
@@ -19,13 +22,20 @@ Ajit Chahhal (ajit.chahhal@sap.com)
 - k8s runtimes
 - Monitoring
 - k8s Controller/CustomResourceDefinitions
+
+Note:
+Sayan
 ---
 ### General News
+
+Note:
+    Ajit asks How can I contribute a project to CNCF?
 ---
 ### CNCF project workflow
 - Sandbox   <!-- .element: class="fragment" -->
 - Incubation <!-- .element: class="fragment" -->
 - Graduated <!-- .element: class="fragment" --> 
+
 ---
 ### Sandbox
 
@@ -43,8 +53,10 @@ A standard defining how services identify themselves to each other. These are ca
 
 A standard for encoding SPIFFE IDs in a cryptographically-verifiable document called a SPIFFE Verifiable Identity Document or SVIDs. -->
 
----
-### Spiffe and Spire
+Note:
+    Ajit: What was new on storage solution in k8s?
+    Sayan: Rook
+
 ---
 ### Incubation
 - CoreDNS <!-- .element: class="fragment" -->
@@ -65,6 +77,11 @@ A standard for encoding SPIFFE IDs in a cryptographically-verifiable document ca
 - TUF   <!-- .element: class="fragment" -->
 <!-- 
 The Update Framework (TUF) helps developers maintain the security of a software update system, even against attackers that compromise the repository or signing keys. TUF provides a flexible framework and specification that developers can adopt into any software update system. -->
+
+Note:
+    Ajit: Prometheus covering later. What's so cool about Envoy? Is there a way to take care DBs in k8s?
+
+    Ajit: Is there any project which actually graduated?
 ---
 ### Graduated
 ##### No surprises <!-- .element: class="fragment" -->
@@ -73,6 +90,10 @@ The Update Framework (TUF) helps developers maintain the security of a software 
 ### Istio 0.8
 - (Hybrid) multicluster support [talk](https://www.youtube.com/watch?v=bLJL53UIcqI&t=0s&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo&index=54)
 
+Note:
+    Ajit: istio is all about separating networking details from application? How istio 0.8 connects inter cloud k8s clusters?
+    ---
+    Ajit: How have statefulsets evolved so far? Any example?
 <!-- There are various use cases with hybrid clouds. By hybrid, it can mean apps running in public cloud, on prem bare metal. Now the problem they are trying to solve is not to have multiple tools to manage these. There should be one standardized tool to manage these. Enter istio, which can provide fine grained canary deployment, intelligent routing of svc requests, secure service communication. Now with the multi cluster feature, istio is able to do these across multiple clusters.... the demo was quite interesting where there are 2 clusters ...the primary cluster has a istio pilot or the control plane running and the secondary one had a headless svc of the pilot running... the primary pilot can then discover all the envoys running across clusters...standard policies can defined which is valid for both the clusters...for example: intelligent routing of svc requests can be done across multiple clusters....  some prerequisites:
 Two or more Kubernetes clusters with 1.7.3 or newer.
 
@@ -88,17 +109,24 @@ All Kubernetes control plane API servers must be routable to each other.
 
 Currently only manual sidecar injection has been validated with multicluster.
 -->
+
 ---
 ### Spark operator
 - [github](https://github.com/GoogleCloudPlatform/spark-on-k8s-operator)
 
-#### ![Image](./assets/sparkoperator.png) 
+![Image](assets/sparkoperator.png) 
 <!-- Handling stateful application in k8s got better with time....Container Storage Interface reached beta 1.10 ... which brings us to spark operator on k8s... demo included: deploying of spark operator and then running spark jobs as an yaml.... a job is corresponding to CRD kind SparkApplication....although Customization of Spark pods, e.g., mounting ConfigMaps and PersistentVolumes is currently experimental and implemented using a Kubernetes Initializer, which is a Kubernetes alpha feature and requires a Kubernetes cluster with alpha features enabled. The Initializer can be disabled if there's no need for pod customization or if running on an alpha cluster is not desirable. -->
+Note:
+    Ajit: So Sayan, in Kyma you are using KUbeless, right? In a event driven work, how are you listening to events from multiple cloud providers? 
+    Sayan: Not yet.....
+
 ---
 ### Cloudevents.io [talk](https://www.youtube.com/watch?v=TZPPjAv12KU&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo&index=288&t=7s) <!-- .element: class="fragment" -->
-#### ![Image](./assets/cloudevents.png) 
+![Image](assets/cloudevents.png) 
 <!--  In a serverless world, functions are the unit of deployment...There are strong trends in this computing model e.g. aws lambda..azure functions ... open source e.g. kubeless , open whisk... and the bottomline is the same..they have a similar trait....pay for use... don't have to manager servers.....and event driven programming model....functions are incomplete without events.... especially IOT or integrations in CI/CD .... so there is a dire need to harmonize the event/Apis/etc... And cloudevents is all about harmonizing events .... cloudevents 0.1 came to picture which has a standard envelope which will help publishers/subscribers/middlerware to better process/route/version/event data .... Here's a JSON representation of cloud events .... eventTypeVersion... data for the actual data....he even had an amazing demo with multiple providers like AWS, google, SAP predicting an image.... and SAP leonardo was doing top notch predictions in comparison to google and amazon ML solutions.   -->
 
+Nate:
+    Ajit: I'm using dockerd as a container runtime. Is it the only option?    
 
 ---
 ## Container runtimes
@@ -108,7 +136,7 @@ Currently only manual sidecar injection has been validated with multicluster.
 - Article: [Demystifying container runtimes](https://lwn.net/Articles/741897/)
 ---
 ## Landscape
-#### ![Image](./assets/runtime-landscape.png)
+![Image](assets/runtime-landscape.png)
 <!-- The landscape looks pretty much like this... openvz and lxc exist by itself. Mesos came up as a paper in UC Berkeley. And there is this hotpotch of all runtimes -->
 ---
 ### Container Runtime Interface(CRI)
@@ -116,7 +144,7 @@ Currently only manual sidecar injection has been validated with multicluster.
 <!-- Supporting interchangeable container runtimes is not a new concept in Kubernetes. In the 1.3 release, we announced the rktnetes project to enable rkt container engine as an alternative to the Docker container runtime. However, both Docker and rkt were integrated directly and deeply into the kubelet source code through an internal and volatile interface. Such an integration process requires a deep understanding of Kubelet internals and incurs significant maintenance overhead to the Kubernetes community. These factors form high barriers to entry for nascent container runtimes. By providing a clearly-defined abstraction layer, we eliminate the barriers and allow developers to focus on building their container runtimes. This is a small, yet important step towards truly enabling pluggable container runtimes and building a healthier ecosystem.
 
  -->
-#### ![Image](./assets/CRI.png)
+![Image](assets/CRI.png)
 - gRPC services
     - ImageService
     - RuntimeService
@@ -136,7 +164,7 @@ Speaker explains in detail how can one implement a new OCI compliant runtime
 
 ---
 ## Containerd
-#### ![Image](./assets/containerd.png)
+![Image](assets/containerd.png)
 ###### [Intro](https://www.youtube.com/watch?v=I0xU6nxnZLY&t=0s&index=335&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo) and [Deep dive](https://www.youtube.com/watch?v=3AynH3c0F8M&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo&index=257&t=0s) talks
 
 <!-- Why another containerd? containerd is an industry-standard core container runtime with an emphasis on simplicity, robustness and portability. It is available as a daemon for Linux and Windows, which can manage the complete container lifecycle of its host system: image transfer and storage, container execution and supervision, low-level storage and network attachments, etc.. Docker engine was getting bigger -->
@@ -158,12 +186,12 @@ Now the question is can we run get rid of docker in any form or the other?
 ### CRIO
 - Pronounced as ***cry+o***
 
-#### ![Image](./assets/crio.png)
+![Image](assets/crio.png)
 <!-- CRI-O has an interesting architecture. It reuses basic components like runc to start containers, and software libraries like containers/image and containers/storage, created for the skopeo project, to pull container images and create container filesystems. A separate library called oci-runtime-tool prepares the container configuration. CRI-O introduces a new daemon to handle containers called conmon. The conmon daemon is needed here to do all of the things that systemd doesn't (want to) do. But even though CRI-O doesn't use systemd directly to manage containers, it assigns containers to systemd-compatible cgroups, so that regular systemd tools like systemctl have visibility into the container resources. Since conmon (and not the CRI daemon) is the parent process of the container, it also allows parts of CRI-O to be restarted without stopping containers, which promises smoother upgrades. This is a problem for Docker deployments right now, where a Docker upgrade requires restarting all of the containers. This is usually not much trouble for Kubernetes clusters, however, because it is easy to roll out upgrades progressively by moving containers around.-->
 
 ---
 ### Frakti
-#### ![Image](./assets/frakti.png)
+![Image](assets/frakti.png)
 - Developed by hyper.sh
 
 <!-- Another CRI implementation which is used to spawn containers based on VMs...this was the 1st non-docker based CRI implementation..Here we see kubelet talking to hyperd client to start runv based containers... for priviledged, it talks to docker shim....it even has unikernel support 
@@ -178,7 +206,7 @@ Now runv based containers bring us to kata containers, -->
  - 
 - Clear containers + runV
 - Talk [Overview of Kata containers](https://www.youtube.com/watch?v=bUOIJBUPPck&t=0s&index=341&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo)
-#### ![Image](./assets/katacontainers.png)
+![Image](assets/katacontainers.png)
 
 <!-- Introduced in 2017, by OpenStack and mostly community driven. Combination of runv(hyper.sh) and clear containers(Intel)... it is OCI compliant...all they are trying is to run containers based on VMs 
 
@@ -195,7 +223,8 @@ Each pod is isolated by the hypervisor
 2 levels of isolation
 The speaker goes on talking about how integration with CRI is done...he explains how CRIO or containerd integrates with kata as well as how frakti integrates with Kata containers
 -->
-
+Note: 
+    Ajit: Prepare
 ---
 ### Other noteable runtimes
 - Mesos
@@ -205,13 +234,16 @@ The speaker goes on talking about how integration with CRI is done...he explains
 - systemd-nspawn
 - lmctfy
 
+Note:
+    Ajit: Sudden stop!!! Can we think something different?
 ---
 ### gVisor
 
 - Talk [introduction to gVisor](https://www.youtube.com/watch?v=pWyJahTWa4I&t=0s&index=326&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo)
 - [Github](https://github.com/google/gvisor)
 
-#### ![Image](./assets/gvisor.png)
+![Image](assets/gvisor.png)
+
 <!-- Although containers have come a long way in terms security, some of the enterprises still don't feel it safe enough. We have various ways of isolation using cgroups, namespaces, white listing syscalls with seccomp but again we see exploits happening. Google thinks sharing the same kernel or sharing same device drivers is the culprit. How can we deny Linux kernel being a huge attack surface. Hence VM based containers are way to go. But nothing comes free, it has a significant resource footprint, inflexible in terms of resource usages and more code to run. Google claims to attack this problem in a different way using gVisor, where they are motivated by the VM based containers and decided not to share the kernel. 
 
 The core of gVisor is a kernel that runs as a normal, unprivileged process that supports most Linux system calls(211). This kernel is written in Go, which was chosen for its memory- and type-safety. Just like within a VM, an application running in a gVisor sandbox gets its own kernel and set of virtualized devices, distinct from the host and other sandboxes.
@@ -223,7 +255,48 @@ they claim this is really good for small containers and bad for syscall heavy wo
 The gVisor runtime integrates seamlessly with Docker and Kubernetes though runsc (short for "run Sandboxed Container"), which conforms to the OCI runtime API.
 
  -->
+Note: 
+    Sayan: Monitoring and alerting is really critical. So what's going on in that space?
+---
+### Prometheus
+- Prometheus is an open-source toolkit for monitoring and alerting
+- It is a pull based metrics gathering system 
+- Simple text for metrics representation
+- PromQL: powerful query language
++++
+#### Metrics Format
+![Image](assets/Prom_svc_port_fwd.png)
+![Image](assets/Prom_metrics_text_eg.png)
 
+Note:
+    Sayan: Prometheus was suffering from performance problems... Did the community take care of this in version2.0?
+---
+
+### Prometheus2   Features
+
+- Optimized Scraping
+- New TSDB (Can persist 1,000,000+ samples/core/sec to disk)
+- Rule format in standard yaml instead of proprietary DSL
++++
+![Image](assets/Prom_rule_format.png)
++++
+![Image](assets/Prom_Bench_1.png)
++++
+![Image](assets/Prom_Bench_2.png)
++++
+![Image](assets/Prom_Bench_3.png)
+
+
+---
+### Application metrics
+- a spring boot app must expose its endpoint
+
+---
+Example spring-boot app
+How to start it on a minikube show
+
+Note:
+    Ajit: We are pretty new to controllers.... can you throw some light on that?
 ---
 ### k8s Controllers
 - Talks: [intro](https://www.youtube.com/watch?v=AUNPLQVxvmw&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo&index=213&t=1246s), [another example](https://www.youtube.com/watch?v=7wdUa4Ulwxg&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo&index=211&t=1s)
@@ -299,6 +372,9 @@ func (c *Ctrl) syncHandler(key string) error {
 
 Cause you are using a shared cache, you are getting a pointer to the object… if you are changing the object, you have to do a deepCopy() of the object. Again, deepCopy() is really expensive, don’t do it too soon.
 -->
+
+Note:
+    Ajit: These are fine. But can you make my life easier? 
 ---
 ### Kube builder
 
@@ -311,7 +387,7 @@ pkg/apis/<group>/<version>/<kind>_types.go```
 ---
 ### Operator framework 
 #### https://coreos.com/blog/introducing-operator-framework
-#### ![Image](./assets/operatorframework.png) 
+![Image](assets/operatorframework.png) 
 
 <!-- Operator framework is an open source toolkit designed to manage Kubernetes native applications, called Operators, in a more effective, automated, and scalable way. 
 
@@ -337,7 +413,8 @@ Apply updates to Operator app instances
 - Random ordering between resources. When controllers queue off multiple types of resources, there is no guarantee of ordering amongst those resources.
 
 -->
-
+Note:
+    Ajit: What's going on in the SIG: api-machinery?
 ---
 ### News on apiextensions-servers/CRD
 
@@ -355,7 +432,9 @@ As in here,
 -->
 ---
 ### Internals of apiextensions-apiserver
-#### ![Image](./assets/apiextensions.png)
+
+![Image](assets/apiextensions.png)
+
 <!-- I felt the internals how a CRD is processed in k8s to be really intriguing
 
 So this is how a kube api server looks like:
@@ -374,6 +453,7 @@ user should change spec
 there are other knitty gritty details about CRDs
 
 -->
+
 ---
 ## Thanks!
 ### Questions?
@@ -383,42 +463,7 @@ Back up
 ### PodSecurityPolicy
 <!-- An example and explain  -->
 
----
-### Prometheus
-- Prometheus is an open-source toolkit for monitoring and alerting
-- It is a pull based metrics gathering system
-- Simple text for metrics representation
-- PromQL: powerful query language
-+++
-#### Metrics Format
-![Image](./assets/Prom_svc_port_fwd.png)
-![Image](./assets/Prom_metrics_text_eg.png)
 
----
-### Prometheus Exporter
-- System Metrics : Node exporter - exposes OS and hardware metrics (linux)
-- Application metrics - a spring boot app must expose its endpoint
--
-
----
-
-### Prometheus2   Features
-
-- Optimized Scraping
-- New TSDB (Can persist 1,000,000+ samples/core/sec to disk)
-- Rule format in standard yaml instead of proprietary DSL
-+++
-![Image](./assets/Prom_rule_format.png)
-+++
-![Image](./assets/Prom_Bench_1.png)
-+++
-![Image](./assets/Prom_Bench_2.png)
-+++
-![Image](./assets/Prom_Bench_3.png)
-
----
-Example spring-boot app
-How to start it on a minikube show
 
 
 
