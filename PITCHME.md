@@ -29,7 +29,7 @@ Sayan
 ### General News
 
 Note:
-    Ajit asks How can I contribute a project to CNCF?
+    Ajit: How can I contribute a project to CNCF?
 ---
 ### CNCF project workflow
 - Sandbox   <!-- .element: class="fragment" -->
@@ -40,7 +40,7 @@ Note:
 ### Sandbox
 
 - Rook <!-- .element: class="fragment" --> [deep dive](https://www.youtube.com/watch?v=yknGKzJw7_k&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo&index=272&t=0s)  <!-- .element: class="fragment" -->
-<!-- Rook turns distributed storage software into a self-managing, self-scaling, and self-healing storage services. It does this by automating deployment, bootstrapping, configuration, provisioning, scaling, upgrading, migration, disaster recovery, monitoring, and resource management. Rook uses the facilities provided by the underlying cloud-native container management, scheduling and orchestration platform to perform its duties. -->
+<!-- Rook turns distributed storage software into a self-managing, self-scaling, and self-healing storage services. It does this by automating deployment, bootstrapping, configuration, provisioning, scaling, upgrading, migration, disaster recovery, monitoring, and resource management. Rook comes with a rook operator and it is a 1st class citizen on k8s which does its job from the cluster itself. -->
 
 - Open Policy Engine <!-- .element: class="fragment" --> [intro](https://www.youtube.com/watch?v=XEHeexPpgrA&t=0s&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo&index=195) <!-- .element: class="fragment" -->
 <!-- The Open Policy Agent (OPA) is an open source, general-purpose policy engine that enables unified, context-aware policy enforcement across the entire stack. -->
@@ -93,7 +93,7 @@ Note:
 Note:
     Ajit: istio is all about separating networking details from application? How istio 0.8 connects inter cloud k8s clusters?
     ---
-    Ajit: How have statefulsets evolved so far? Any example?
+    Ajit: How have statefulsets evolved so far? Are there any example?
 <!-- There are various use cases with hybrid clouds. By hybrid, it can mean apps running in public cloud, on prem bare metal. Now the problem they are trying to solve is not to have multiple tools to manage these. There should be one standardized tool to manage these. Enter istio, which can provide fine grained canary deployment, intelligent routing of svc requests, secure service communication. Now with the multi cluster feature, istio is able to do these across multiple clusters.... the demo was quite interesting where there are 2 clusters ...the primary cluster has a istio pilot or the control plane running and the secondary one had a headless svc of the pilot running... the primary pilot can then discover all the envoys running across clusters...standard policies can defined which is valid for both the clusters...for example: intelligent routing of svc requests can be done across multiple clusters....  some prerequisites:
 Two or more Kubernetes clusters with 1.7.3 or newer.
 
@@ -113,11 +113,12 @@ Currently only manual sidecar injection has been validated with multicluster.
 ---
 ### Spark operator
 - [github](https://github.com/GoogleCloudPlatform/spark-on-k8s-operator)
+- [talk](https://www.youtube.com/watch?v=2eAOx8E6-5Q&index=16&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo&t=818s)
 
 ![Image](assets/sparkoperator.png) 
 <!-- Handling stateful application in k8s got better with time....Container Storage Interface reached beta 1.10 ... which brings us to spark operator on k8s... demo included: deploying of spark operator and then running spark jobs as an yaml.... a job is corresponding to CRD kind SparkApplication....although Customization of Spark pods, e.g., mounting ConfigMaps and PersistentVolumes is currently experimental and implemented using a Kubernetes Initializer, which is a Kubernetes alpha feature and requires a Kubernetes cluster with alpha features enabled. The Initializer can be disabled if there's no need for pod customization or if running on an alpha cluster is not desirable. -->
 Note:
-    Ajit: So Sayan, in Kyma you are using KUbeless, right? In a event driven work, how are you listening to events from multiple cloud providers? 
+    Ajit: So Sayan, in Kyma you are using KUbeless, right? In an event driven world, how are you listening to events from multiple cloud providers? 
     Sayan: Not yet.....
 
 ---
@@ -125,7 +126,7 @@ Note:
 ![Image](assets/cloudevents.png) 
 <!--  In a serverless world, functions are the unit of deployment...There are strong trends in this computing model e.g. aws lambda..azure functions ... open source e.g. kubeless , open whisk... and the bottomline is the same..they have a similar trait....pay for use... don't have to manager servers.....and event driven programming model....functions are incomplete without events.... especially IOT or integrations in CI/CD .... so there is a dire need to harmonize the event/Apis/etc... And cloudevents is all about harmonizing events .... cloudevents 0.1 came to picture which has a standard envelope which will help publishers/subscribers/middlerware to better process/route/version/event data .... Here's a JSON representation of cloud events .... eventTypeVersion... data for the actual data....he even had an amazing demo with multiple providers like AWS, google, SAP predicting an image.... and SAP leonardo was doing top notch predictions in comparison to google and amazon ML solutions.   -->
 
-Nate:
+Note:
     Ajit: I'm using dockerd as a container runtime. Is it the only option?    
 
 ---
@@ -418,7 +419,6 @@ Note:
 ---
 ### News on apiextensions-servers/CRD
 
-  - 
 - [Deep dive](https://www.youtube.com/watch?v=XsFH7OEIIvI&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo&t=1833s&index=274) on API Machinery
 - Support multiple versions (1.11+)
 - Defaulting based on OpenAPI validation (1.11+)
@@ -445,12 +445,12 @@ Admission webhooks: e.g. validating webhook which can validate whatever you like
 
 Stresses on validation… right now, validation is not Turing complete and there are limitations.. As it is verbose, there are tools to generate openapi validations
 
+there are other knitty gritty details about CRDs
+
 spec/status split(although alpha): making status as a subresource
 one security reason:
 controller should change status
 user should change spec
-
-there are other knitty gritty details about CRDs
 
 -->
 
