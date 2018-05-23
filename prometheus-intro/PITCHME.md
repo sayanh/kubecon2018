@@ -8,10 +8,10 @@ Ajit Chahhal (ajit.chahhal@sap.com)
 ### Disclaimer
 ---
 ### Copenhagen
-![Image](./assets/md/assets/copenhagen.jpg)
+![Image](./assets/copenhagen.jpg)
 ---
 ### Opensource / Community / Code
-- ![Image](./assets/md/assets/people.jpg)
+- ![Image](./assets/people.jpg)
 <!-- It was about the community..... met developers from kubeless with whom I work over github...few people SIG api machinery... -->
 ---
 ### AGENDA
@@ -92,11 +92,11 @@ Currently only manual sidecar injection has been validated with multicluster.
 ### Spark operator
 - [github](https://github.com/GoogleCloudPlatform/spark-on-k8s-operator)
 
-#### ![Image](./assets/md/assets/sparkoperator.png) 
+#### ![Image](./assets/sparkoperator.png) 
 <!-- Handling stateful application in k8s got better with time....Container Storage Interface reached beta 1.10 ... which brings us to spark operator on k8s... demo included: deploying of spark operator and then running spark jobs as an yaml.... a job is corresponding to CRD kind SparkApplication....although Customization of Spark pods, e.g., mounting ConfigMaps and PersistentVolumes is currently experimental and implemented using a Kubernetes Initializer, which is a Kubernetes alpha feature and requires a Kubernetes cluster with alpha features enabled. The Initializer can be disabled if there's no need for pod customization or if running on an alpha cluster is not desirable. -->
 ---
 ### Cloudevents.io [talk](https://www.youtube.com/watch?v=TZPPjAv12KU&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo&index=288&t=7s) <!-- .element: class="fragment" -->
-#### ![Image](./assets/md/assets/cloudevents.png) 
+#### ![Image](./assets/cloudevents.png) 
 <!--  In a serverless world, functions are the unit of deployment...There are strong trends in this computing model e.g. aws lambda..azure functions ... open source e.g. kubeless , open whisk... and the bottomline is the same..they have a similar trait....pay for use... don't have to manager servers.....and event driven programming model....functions are incomplete without events.... especially IOT or integrations in CI/CD .... so there is a dire need to harmonize the event/Apis/etc... And cloudevents is all about harmonizing events .... cloudevents 0.1 came to picture which has a standard envelope which will help publishers/subscribers/middlerware to better process/route/version/event data .... Here's a JSON representation of cloud events .... eventTypeVersion... data for the actual data....he even had an amazing demo with multiple providers like AWS, google, SAP predicting an image.... and SAP leonardo was doing top notch predictions in comparison to google and amazon ML solutions.   -->
 
 
@@ -108,7 +108,7 @@ Currently only manual sidecar injection has been validated with multicluster.
 - Article: [Demystifying container runtimes](https://lwn.net/Articles/741897/)
 ---
 ## Landscape
-#### ![Image](./assets/md/assets/runtime-landscape.png)
+#### ![Image](./assets/runtime-landscape.png)
 <!-- The landscape looks pretty much like this... openvz and lxc exist by itself. Mesos came up as a paper in UC Berkeley. And there is this hotpotch of all runtimes -->
 ---
 ### Container Runtime Interface(CRI)
@@ -116,7 +116,7 @@ Currently only manual sidecar injection has been validated with multicluster.
 <!-- Supporting interchangeable container runtimes is not a new concept in Kubernetes. In the 1.3 release, we announced the rktnetes project to enable rkt container engine as an alternative to the Docker container runtime. However, both Docker and rkt were integrated directly and deeply into the kubelet source code through an internal and volatile interface. Such an integration process requires a deep understanding of Kubelet internals and incurs significant maintenance overhead to the Kubernetes community. These factors form high barriers to entry for nascent container runtimes. By providing a clearly-defined abstraction layer, we eliminate the barriers and allow developers to focus on building their container runtimes. This is a small, yet important step towards truly enabling pluggable container runtimes and building a healthier ecosystem.
 
  -->
-#### ![Image](./assets/md/assets/CRI.png)
+#### ![Image](./assets/CRI.png)
 - gRPC services
     - ImageService
     - RuntimeService
@@ -136,7 +136,7 @@ Speaker explains in detail how can one implement a new OCI compliant runtime
 
 ---
 ## Containerd
-#### ![Image](./assets/md/assets/containerd.png)
+#### ![Image](./assets/containerd.png)
 ###### [Intro](https://www.youtube.com/watch?v=I0xU6nxnZLY&t=0s&index=335&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo) and [Deep dive](https://www.youtube.com/watch?v=3AynH3c0F8M&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo&index=257&t=0s) talks
 
 <!-- Why another containerd? containerd is an industry-standard core container runtime with an emphasis on simplicity, robustness and portability. It is available as a daemon for Linux and Windows, which can manage the complete container lifecycle of its host system: image transfer and storage, container execution and supervision, low-level storage and network attachments, etc.. Docker engine was getting bigger -->
@@ -158,12 +158,12 @@ Now the question is can we run get rid of docker in any form or the other?
 ### CRIO
 - Pronounced as ***cry+o***
 
-#### ![Image](./assets/md/assets/crio.png)
+#### ![Image](./assets/crio.png)
 <!-- CRI-O has an interesting architecture. It reuses basic components like runc to start containers, and software libraries like containers/image and containers/storage, created for the skopeo project, to pull container images and create container filesystems. A separate library called oci-runtime-tool prepares the container configuration. CRI-O introduces a new daemon to handle containers called conmon. The conmon daemon is needed here to do all of the things that systemd doesn't (want to) do. But even though CRI-O doesn't use systemd directly to manage containers, it assigns containers to systemd-compatible cgroups, so that regular systemd tools like systemctl have visibility into the container resources. Since conmon (and not the CRI daemon) is the parent process of the container, it also allows parts of CRI-O to be restarted without stopping containers, which promises smoother upgrades. This is a problem for Docker deployments right now, where a Docker upgrade requires restarting all of the containers. This is usually not much trouble for Kubernetes clusters, however, because it is easy to roll out upgrades progressively by moving containers around.-->
 
 ---
 ### Frakti
-#### ![Image](./assets/md/assets/frakti.png)
+#### ![Image](./assets/frakti.png)
 - Developed by hyper.sh
 
 <!-- Another CRI implementation which is used to spawn containers based on VMs...this was the 1st non-docker based CRI implementation..Here we see kubelet talking to hyperd client to start runv based containers... for priviledged, it talks to docker shim....it even has unikernel support 
@@ -178,7 +178,7 @@ Now runv based containers bring us to kata containers, -->
  - 
 - Clear containers + runV
 - Talk [Overview of Kata containers](https://www.youtube.com/watch?v=bUOIJBUPPck&t=0s&index=341&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo)
-#### ![Image](./assets/md/assets/katacontainers.png)
+#### ![Image](./assets/katacontainers.png)
 
 <!-- Introduced in 2017, by OpenStack and mostly community driven. Combination of runv(hyper.sh) and clear containers(Intel)... it is OCI compliant...all they are trying is to run containers based on VMs 
 
@@ -211,7 +211,7 @@ The speaker goes on talking about how integration with CRI is done...he explains
 - Talk [introduction to gVisor](https://www.youtube.com/watch?v=pWyJahTWa4I&t=0s&index=326&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo)
 - [Github](https://github.com/google/gvisor)
 
-#### ![Image](./assets/md/assets/gvisor.png)
+#### ![Image](./assets/gvisor.png)
 <!-- Although containers have come a long way in terms security, some of the enterprises still don't feel it safe enough. We have various ways of isolation using cgroups, namespaces, white listing syscalls with seccomp but again we see exploits happening. Google thinks sharing the same kernel or sharing same device drivers is the culprit. How can we deny Linux kernel being a huge attack surface. Hence VM based containers are way to go. But nothing comes free, it has a significant resource footprint, inflexible in terms of resource usages and more code to run. Google claims to attack this problem in a different way using gVisor, where they are motivated by the VM based containers and decided not to share the kernel. 
 
 The core of gVisor is a kernel that runs as a normal, unprivileged process that supports most Linux system calls(211). This kernel is written in Go, which was chosen for its memory- and type-safety. Just like within a VM, an application running in a gVisor sandbox gets its own kernel and set of virtualized devices, distinct from the host and other sandboxes.
@@ -311,7 +311,7 @@ pkg/apis/<group>/<version>/<kind>_types.go```
 ---
 ### Operator framework 
 #### https://coreos.com/blog/introducing-operator-framework
-#### ![Image](./assets/md/assets/operatorframework.png) 
+#### ![Image](./assets/operatorframework.png) 
 
 <!-- Operator framework is an open source toolkit designed to manage Kubernetes native applications, called Operators, in a more effective, automated, and scalable way. 
 
@@ -355,7 +355,7 @@ As in here,
 -->
 ---
 ### Internals of apiextensions-apiserver
-#### ![Image](./assets/md/assets/apiextensions.png)
+#### ![Image](./assets/apiextensions.png)
 <!-- I felt the internals how a CRD is processed in k8s to be really intriguing
 
 So this is how a kube api server looks like:
@@ -391,8 +391,8 @@ Back up
 - PromQL: powerful query language
 +++
 #### Metrics Format
-![Image](./assets/md/assets/Prom_svc_port_fwd.png)
-![Image](./assets/md/assets/Prom_metrics_text_eg.png)
+![Image](./assets/Prom_svc_port_fwd.png)
+![Image](./assets/Prom_metrics_text_eg.png)
 
 ---
 ### Prometheus Exporter
@@ -408,13 +408,13 @@ Back up
 - New TSDB (Can persist 1,000,000+ samples/core/sec to disk)
 - Rule format in standard yaml instead of proprietary DSL
 +++
-![Image](./assets/md/assets/Prom_rule_format.png)
+![Image](./assets/Prom_rule_format.png)
 +++
-![Image](./assets/md/assets/Prom_Bench_1.png)
+![Image](./assets/Prom_Bench_1.png)
 +++
-![Image](./assets/md/assets/Prom_Bench_2.png)
+![Image](./assets/Prom_Bench_2.png)
 +++
-![Image](./assets/md/assets/Prom_Bench_3.png)
+![Image](./assets/Prom_Bench_3.png)
 
 ---
 Example spring-boot app
