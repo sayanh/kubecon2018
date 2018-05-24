@@ -90,6 +90,7 @@ Note:
 
 Note:
     Ajit: istio is all about separating networking details from application? How istio 0.8 connects inter cloud k8s clusters? Ajit: How have statefulsets evolved so far? Are there any example?
+
 <!-- There are various use cases with hybrid clouds. By hybrid, it can mean apps running in public cloud, on prem bare metal. Now the problem they are trying to solve is not to have multiple tools to manage these. There should be one standardized tool to manage these. Enter istio, which can provide fine grained canary deployment, intelligent routing of svc requests, secure service communication. Now with the multi cluster feature, istio is able to do these across multiple clusters.... the demo was quite interesting where there are 2 clusters ...the primary cluster has a istio pilot or the control plane running and the secondary one had a headless svc of the pilot running... the primary pilot can then discover all the envoys running across clusters...standard policies can defined which is valid for both the clusters...for example: intelligent routing of svc requests can be done across multiple clusters....  some prerequisites:
 Two or more Kubernetes clusters with 1.7.3 or newer.
 
