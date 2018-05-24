@@ -3,7 +3,7 @@
 --- 
 Sayan Hazra (sayan.hazra@sap.com)
 
-Ajit Chahhal (ajit.chahhal@sap.com)
+Ajit Singh Chahal (ajit.singh.chahal@sap.com)
 ---
 ### Disclaimer
 ---
@@ -256,48 +256,46 @@ they claim this is really good for small containers and bad for syscall heavy wo
 The gVisor runtime integrates seamlessly with Docker and Kubernetes though runsc (short for "run Sandboxed Container"), which conforms to the OCI runtime API.
 
  -->
-Note: 
-    Sayan: Monitoring and alerting is really critical. So what's going on in that space?
+Note:
+Sayan: Monitoring and alerting is really critical. So what's going on in that space?
 ---
 ### Prometheus
-- Prometheus is an open-source toolkit for monitoring and alerting
-- It is a pull based metrics gathering system 
+- Toolkit for monitoring and alerting
+- Pull based metrics gathering
 - Simple text for metrics representation
 - PromQL: powerful query language
-+++
-#### Metrics Format
-![Image](assets/Prom_svc_port_fwd.png)
-![Image](assets/Prom_metrics_text_eg.png)
 
 Note:
-    Sayan: Prometheus was suffering from performance problems... Did the community take care of this in version2.0?
+Sayan: nice features, Prometheus was suffering from performance problems... Did the community take care of this in version2.0?
 ---
-
-### Prometheus2   Features
-
-- Optimized Scraping
-- New TSDB (Can persist 1,000,000+ samples/core/sec to disk)
-- Rule format in standard yaml instead of proprietary DSL
-+++
-![Image](assets/Prom_rule_format.png)
+### Prometheus2 Features
+- New time series database (can persist 1,000,000+ samples/core/sec to disk)
+- Optimized scraping
+- Prometheus rules in standard yaml, instead of proprietary DSL
 +++
 ![Image](assets/Prom_Bench_1.png)
 +++
 ![Image](assets/Prom_Bench_2.png)
 +++
 ![Image](assets/Prom_Bench_3.png)
-
-
++++
+![Image](assets/Prom_rule_format.png)
+Note:
+Sayan: That fine but what about autoscaling.
 ---
-### Application metrics
-- a spring boot app must expose its endpoint
+### Horizontal Pod Autoscaler
+- V1: cpu based auto scaling only
+- V2: autoscaling with custom metrics (beta)
+- Custom metrics adapter is required (https://github.com/DirectXMan12/k8s-prometheus-adapter)
++++
+![Image](assets/Custom_metrics_1.png)
++++
+![Image](assets/Custom_metrics.png)
 
----
-Example spring-boot app
-How to start it on a minikube show
+CNCF Talk https://youtu.be/1xm_ccAYO90
 
 Note:
-    Ajit: We are pretty new to controllers.... can you throw some light on that?
+    Ajit: We are pretty new to k8s custom controllers.... can you throw some light on that?
 ---
 ### k8s Controllers
 - Talks: [intro](https://www.youtube.com/watch?v=AUNPLQVxvmw&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo&index=213&t=1246s), [another example](https://www.youtube.com/watch?v=7wdUa4Ulwxg&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo&index=211&t=1s)
