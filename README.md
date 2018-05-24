@@ -1,14 +1,16 @@
+## Details
+EU Kubecon Cloudnativecon 2018 highlights 
+
 ## Accessing the presentation
 
-### online
+### Online
 
-https://gitpitch.com/ajitchahal/talks?p=prometheus-intro
+https://gitpitch.com/sayanh/kubecon2018
 
+Based on: https://github.com/ajitchahal/talks/tree/master/prometheus-intro
 
 ### offline
-cd talks/prometheus-intro/PITCHME.offline
+TBD
 
 Execute:
-
-
 python -m SimpleHTTPServer
