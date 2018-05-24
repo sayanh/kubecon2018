@@ -79,9 +79,7 @@ Note:
 The Update Framework (TUF) helps developers maintain the security of a software update system, even against attackers that compromise the repository or signing keys. TUF provides a flexible framework and specification that developers can adopt into any software update system. -->
 
 Note:
-    Ajit: Prometheus covering later. What's so cool about Envoy? Is there a way to take care DBs in k8s?
-
-    Ajit: Is there any project which actually graduated?
+    Ajit: Prometheus covering later. What's so cool about Envoy?     Ajit: Is there a way to take care DBs in k8s?    Ajit: Is there any project which actually graduated?
 ---
 ### Graduated
 ##### No surprises <!-- .element: class="fragment" -->
@@ -91,9 +89,7 @@ Note:
 - (Hybrid) multicluster support [talk](https://www.youtube.com/watch?v=bLJL53UIcqI&t=0s&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo&index=54)
 
 Note:
-    Ajit: istio is all about separating networking details from application? How istio 0.8 connects inter cloud k8s clusters?
-    ---
-    Ajit: How have statefulsets evolved so far? Are there any example?
+    Ajit: istio is all about separating networking details from application? How istio 0.8 connects inter cloud k8s clusters? Ajit: How have statefulsets evolved so far? Are there any example?
 <!-- There are various use cases with hybrid clouds. By hybrid, it can mean apps running in public cloud, on prem bare metal. Now the problem they are trying to solve is not to have multiple tools to manage these. There should be one standardized tool to manage these. Enter istio, which can provide fine grained canary deployment, intelligent routing of svc requests, secure service communication. Now with the multi cluster feature, istio is able to do these across multiple clusters.... the demo was quite interesting where there are 2 clusters ...the primary cluster has a istio pilot or the control plane running and the secondary one had a headless svc of the pilot running... the primary pilot can then discover all the envoys running across clusters...standard policies can defined which is valid for both the clusters...for example: intelligent routing of svc requests can be done across multiple clusters....  some prerequisites:
 Two or more Kubernetes clusters with 1.7.3 or newer.
 
@@ -112,10 +108,9 @@ Currently only manual sidecar injection has been validated with multicluster.
 
 ---
 ### Spark operator
-- [github](https://github.com/GoogleCloudPlatform/spark-on-k8s-operator)
-- [talk](https://www.youtube.com/watch?v=2eAOx8E6-5Q&index=16&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo&t=818s)
-
+- [talk](https://www.youtube.com/watch?v=2eAOx8E6-5Q&index=16&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo&t=818s) / [github](https://github.com/GoogleCloudPlatform/spark-on-k8s-operator)
 ![Image](assets/sparkoperator.png) 
+
 <!-- Handling stateful application in k8s got better with time....Container Storage Interface reached beta 1.10 ... which brings us to spark operator on k8s... demo included: deploying of spark operator and then running spark jobs as an yaml.... a job is corresponding to CRD kind SparkApplication....although Customization of Spark pods, e.g., mounting ConfigMaps and PersistentVolumes is currently experimental and implemented using a Kubernetes Initializer, which is a Kubernetes alpha feature and requires a Kubernetes cluster with alpha features enabled. The Initializer can be disabled if there's no need for pod customization or if running on an alpha cluster is not desirable. -->
 Note:
     Ajit: So Sayan, in Kyma you are using KUbeless, right? In an event driven world, how are you listening to events from multiple cloud providers? 
@@ -204,7 +199,6 @@ Now runv based containers bring us to kata containers, -->
 ---
 ### Kata containers
 
- - 
 - Clear containers + runV
 - Talk [Overview of Kata containers](https://www.youtube.com/watch?v=bUOIJBUPPck&t=0s&index=341&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo)
 ![Image](assets/katacontainers.png)
